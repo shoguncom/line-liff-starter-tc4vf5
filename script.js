@@ -1,11 +1,17 @@
-async function getUserProfile() {
-  const profile = await liff.getProfile()
-  pictureUrl.src = profile.pictureUrl
-  userId.innerHTML = "<b>userId:</b> " + profile.userId
-  statusMessage.innerHTML = "<b>statusMessage:</b> " + profile.statusMessage
-  displayName.innerHTML = "<b>displayName:</b> " + profile.displayName
-  email.innerHTML = "<b>email:</b> " + liff.getDecodedIDToken().email
-}
+const bodyTag = document.getElementById('bodyTag');
+const btnShare = document.getElementById('btnShare');
+const btnLogIn = document.getElementById('btnLogIn');
+const btnLogOut = document.getElementById('btnLogOut');
+const btnSend = document.getElementById('btnSend');
+const btnScanCode = document.getElementById('btnScanCode');
+const btnOpenWindow = document.getElementById('btnOpenWindow');
+const pictureUrl = document.getElementById('pictureUrl');
+const userId = document.getElementById('userId');
+const statusMessage = document.getElementById('statusMessage');
+const displayName = document.getElementById('displayName');
+const email = document.getElementById('email');
+const code = document.getElementById('code');
+const friendShip = document.getElementById('friendShip');
 
 async function main() {
   // Initialize LIFF app
@@ -13,9 +19,9 @@ async function main() {
 
   // Try a LIFF function
   switch (liff.getOS()) {
-    case "android": body.style.backgroundColor = "#d1f5d3"; break
-    case "ios": body.style.backgroundColor = "#eeeeee"; break
-    case "web": body.style.backgroundColor = "#ff00ff"; break
+    case "android": bodyTag.style.backgroundColor = "#d1f5d3"; break
+    case "ios": bodyTag.style.backgroundColor = "#eeeeee"; break
+    case "web": bodyTag.style.backgroundColor = "#ff00ff"; break
   }
     
   if (!liff.isInClient()) {
@@ -42,6 +48,15 @@ async function main() {
 
   btnOpenWindow.style.display = "block"
 
+}
+
+async function getUserProfile() {
+  const profile = await liff.getProfile()
+  pictureUrl.src = profile.pictureUrl
+  userId.innerHTML = "<b>userId:</b> " + profile.userId
+  statusMessage.innerHTML = "<b>statusMessage:</b> " + profile.statusMessage
+  displayName.innerHTML = "<b>displayName:</b> " + profile.displayName
+  email.innerHTML = "<b>email:</b> " + liff.getDecodedIDToken().email
 }
 
 btnLogIn.onclick = () => {
